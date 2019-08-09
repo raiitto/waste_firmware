@@ -97,19 +97,6 @@ void loop() {
       }else{
         retorno = "ok";
       }
-        /* Split the command in two values
-        char* separator = strchr(comando, ':');
-        if (separator != 0)
-        {
-            // Actually split the string in 2: replace ':' with 0
-            *separator = 0;
-            int servoId = atoi(comando);
-            ++separator;
-            int position = atoi(separator);
-    
-            // Do something with servoId and position
-        }
-        */
     }
     Serial.println(retorno);// can be ok, rs or !!.   ok, resend, hardware error
   }
