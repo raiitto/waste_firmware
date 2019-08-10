@@ -35,7 +35,9 @@ void setup_aquecedores(){
   pinMode(pino_aquecedor_extrusora, OUTPUT);
   pinMode(pino_ventoinha_extrusora, OUTPUT);
   pinMode(pino_aquecedor_base, OUTPUT);
-  pinMode(pino_ventoinha_base, OUTPUT);
+  if(pino_ventoinha_base!=-1){
+    pinMode(pino_ventoinha_base, OUTPUT);
+  }
 }
 
 long ultima_leitura = 0;

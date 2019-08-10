@@ -20,17 +20,18 @@
 
 
 void setup() {
+  Serial.begin(115200);
+  delay(10);
+  Serial.println("Iniciando...");
   setup_aquecedores();
   setup_eixos();
   setup_extrusora();
-  digitalWrite(eixoZstep,1);
-  Serial.begin(9600);
-  
-  delay(10);
+  Serial.println("Pronto!");
 }
 
   int tamanho = 0;
 void loop() {
+  loop_aquecedores();
   boolean pronto=false;
   char* buff= new char[101];
   tamanho=0;
@@ -60,9 +61,11 @@ void loop() {
       if(comando_g0.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g1(parametro);
+    Serial.println("comando G0");
       }else if(comando_g1.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g1(parametro);
+    Serial.println("comando G1");
       }else if(comando_g4.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g4(parametro);
@@ -109,6 +112,7 @@ void loop() {
       }else{
         retorno = "ok";
       }
+      comando = strtok(0, " ");//Encontrar o proximo parametro
     }
     Serial.println(retorno);// can be ok, rs or !!.   ok, resend, hardware error
   }
