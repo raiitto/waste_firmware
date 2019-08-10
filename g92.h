@@ -1,68 +1,45 @@
 char* g92(char* parametros){
-  /*
-  int x = 0;
-  float cordX=0;
-  float cordY=0;
-  float cordZ=0;
-  while(x<tamanho){
-    if(buff[x]=='X'){
-      x++;
-      int y=x;
-      int cont=0;
-      while(buff[y]!=' '){
-        y++;
-        cont++;
-      }
-      char* buffX = new char[cont];
-      cont=0;
-      while(buff[x]!=' '){
-        buffX[cont]=buff[x];
-        x++;
-        cont++;
-      }
-      cordX =  atof(buffX);
+  float Xnnn = nao_iniciado;//The position to move to on the X axis
+  float Ynnn = nao_iniciado;//The position to move to on the Y axis
+  float Znnn = nao_iniciado;//The position to move to on the Z axis
+  float Ennn = nao_iniciado;//The amount to extrude between the starting point and ending point
+  while (parametros != 0)
+  {
+    String parametro = parametros;
+    if(parametro.indexOf("X")>0){
+      ++parametros;//Avancar uma posicao na memoria
+      Xnnn=atof(parametros);
+    }else if(parametro.indexOf("Y")>0){
+      ++parametros;//Avancar uma posicao na memoria
+      Ynnn=atof(parametros);
+    }else if(parametro.indexOf("Z")>0){
+      ++parametros;//Avancar uma posicao na memoria
+      Znnn=atof(parametros);
+    }else if(parametro.indexOf("E")>0){
+      ++parametros;//Avancar uma posicao na memoria
+      Ennn=atof(parametros);
     }
-    else if(buff[x]=='Y'){
-      x++;
-      int y=x;
-      int cont=0;
-      while(buff[y]!=' '){
-        y++;
-        cont++;
-      }
-      char* buffY = new char[cont];
-      cont=0;
-      while(buff[x]!=' '){
-        buffY[cont]=buff[x];
-        x++;
-        cont++;
-      }
-      cordY =  atof(buffY);
-    }else if(buff[x]=='Z'){
-      x++;
-      int y=x;
-      int cont=0;
-      while(buff[y]!=' '){
-        y++;
-        cont++;
-      }
-      cont=0;
-      char* buffZ = new char[cont];
-      while(buff[x]!=' '){
-        buffZ[cont];
-        x++;
-      }
-      cordZ =  atof(buffZ);//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    }
-
-    x++;
+    parametros = strtok(0, " ");//Encontrar o proximo parametro
   }
-  moveTo(cordX,cordY);
-        Serial.print("Posicao definida para ");
-        Serial.print(cordX);
-        Serial.print(" ");
-        Serial.print(cordY);
-        Serial.print(" ");
-        Serial.println(cordZ);
-        */
+  String retorno = "ok";
+  if(Xnnn==nao_iniciado&&Ynnn==nao_iniciado&&Znnn==nao_iniciado&&Ennn==nao_iniciado){
+    g_cordenada_extruder=0;
+    g_x=0;
+    g_y=0;
+    g_z=0;
+    return (char*)retorno.c_str();
+  }
+  if(Xnnn!=nao_iniciado){
+    g_x=Xnnn;
+  }
+  if(Ynnn!=nao_iniciado){
+    g_y=Ynnn;
+  }
+  if(Znnn!=nao_iniciado){
+    g_z=Znnn;
+  }
+  if(Ennn!=nao_iniciado){
+    g_cordenada_extruder=Ennn;
+  }
+  return (char*)retorno.c_str();
 }

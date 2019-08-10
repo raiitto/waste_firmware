@@ -9,6 +9,15 @@ float tamanho_passo_eixo_x = 0.25;
 float tamanho_passo_eixo_y = 0.25;
 float tamanho_passo_eixo_z = 0.25;
 
+#define maxX 78
+#define maxY 78 // 80
+#define maxZ 78 // 80
+
+int x_passos_coordenada = 0;
+int y_passos_coordenada = 0;
+int z_passos_coordenada = 0;
+
+
 void setup_eixos(){
   pinMode(eixoXdir, OUTPUT);
   pinMode(eixoXstep, OUTPUT);
@@ -20,49 +29,104 @@ void setup_eixos(){
 
 void eixoX(boolean a,int tempo){
   if(tempo<2)tempo=2;
-  if(a)
+  boolean passo_x_permissao = true;
+  if(a){
     digitalWrite(eixoXdir,0);
-  else
+    x_passos_coordenada++;
+    if(x_passos_coordenada>maxX||x_passos_coordenada<=0){
+      passo_x_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoXdir,1);
-  digitalWrite(eixoXstep,0);
+    x_passos_coordenada--;
+    if(x_passos_coordenada<0||x_passos_coordenada>=maxX){
+      passo_x_permissao=false;
+    }
+  }
+  if(passo_x_permissao)digitalWrite(eixoXstep,0);
   delay(tempo/2);
   digitalWrite(eixoXstep,1);
   delay(tempo/2);
 }
 void eixoY(boolean a,int tempo){
   if(tempo<2)tempo=2;
-  if(a)
+  boolean passo_y_permissao = true;
+  if(a){
     digitalWrite(eixoYdir,0);
-  else
+    y_passos_coordenada++;
+    if(y_passos_coordenada>maxY||y_passos_coordenada<=0){
+      passo_y_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoYdir,1);
-  digitalWrite(eixoYstep,0);
+    y_passos_coordenada--;
+    if(y_passos_coordenada<0||y_passos_coordenada>=maxY){
+      passo_y_permissao=false;
+    }
+  }
+  if(passo_y_permissao)digitalWrite(eixoYstep,0);
   delay(tempo/2);
   digitalWrite(eixoYstep,1);
   delay(tempo/2);
 }
 void eixoZ(boolean a,int tempo){
   if(tempo<2)tempo=2;
-  if(a)
+  boolean passo_z_permissao = true;
+  if(a){
     digitalWrite(eixoZdir,1);
-  else
+    z_passos_coordenada++;
+    if(z_passos_coordenada>maxZ||z_passos_coordenada<=0){
+      passo_z_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoZdir,0);
-  digitalWrite(eixoZstep,0);
+    z_passos_coordenada--;
+    if(z_passos_coordenada<0||z_passos_coordenada>=maxZ){
+      passo_z_permissao=false;
+    }
+  }
+  if(passo_z_permissao)digitalWrite(eixoZstep,0);
   delay(tempo/2);
   digitalWrite(eixoZstep,1);
   delay(tempo/2);
 }
 void eixoXY(boolean a, boolean b, int tempo){
   if(tempo<2)tempo=2;
-  if(a)
+  boolean passo_x_permissao = true;
+  boolean passo_y_permissao = true;
+  if(a){
     digitalWrite(eixoXdir,1);
-  else
+    x_passos_coordenada++;
+    if(x_passos_coordenada>maxX||x_passos_coordenada<=0){
+      passo_x_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoXdir,0);
-  if(b)
+    x_passos_coordenada--;
+    if(x_passos_coordenada<0||x_passos_coordenada>=maxX){
+      passo_x_permissao=false;
+    }
+  }
+  if(b){
     digitalWrite(eixoYdir,1);
-  else
+    y_passos_coordenada++;
+    if(y_passos_coordenada>maxY||y_passos_coordenada<=0){
+      passo_y_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoYdir,0);
-  digitalWrite(eixoXstep,0);
-  digitalWrite(eixoYstep,0);
+    y_passos_coordenada--;
+    if(y_passos_coordenada<0||y_passos_coordenada>=maxY){
+      passo_y_permissao=false;
+    }
+  }
+  if(passo_x_permissao)digitalWrite(eixoXstep,0);
+  if(passo_y_permissao)digitalWrite(eixoYstep,0);
   delay(tempo/2);
   digitalWrite(eixoXstep,1);
   digitalWrite(eixoYstep,1);
@@ -70,16 +134,38 @@ void eixoXY(boolean a, boolean b, int tempo){
 }
 void eixoXZ(boolean a, boolean b, int tempo){
   if(tempo<2)tempo=2;
-  if(a)
+  boolean passo_x_permissao = true;
+  boolean passo_z_permissao = true;
+  if(a){
     digitalWrite(eixoXdir,1);
-  else
+    x_passos_coordenada++;
+    if(x_passos_coordenada>maxX||x_passos_coordenada<=0){
+      passo_x_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoXdir,0);
-  if(b)
+    x_passos_coordenada--;
+    if(x_passos_coordenada<0||x_passos_coordenada>=maxX){
+      passo_x_permissao=false;
+    }
+  }
+  if(b){
     digitalWrite(eixoZdir,1);
-  else
+    z_passos_coordenada++;
+    if(z_passos_coordenada>maxZ||z_passos_coordenada<=0){
+      passo_z_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoZdir,0);
-  digitalWrite(eixoXstep,0);
-  digitalWrite(eixoZstep,0);
+    z_passos_coordenada--;
+    if(z_passos_coordenada<0||z_passos_coordenada>=maxZ){
+      passo_z_permissao=false;
+    }
+  }
+  if(passo_x_permissao)digitalWrite(eixoXstep,0);
+  if(passo_z_permissao)digitalWrite(eixoZstep,0);
   delay(tempo/2);
   digitalWrite(eixoXstep,1);
   digitalWrite(eixoZstep,1);
@@ -87,16 +173,38 @@ void eixoXZ(boolean a, boolean b, int tempo){
 }
 void eixoYZ(boolean a, boolean b, int tempo){
   if(tempo<2)tempo=2;
-  if(a)
+  boolean passo_y_permissao = true;
+  boolean passo_z_permissao = true;
+  if(a){
     digitalWrite(eixoYdir,1);
-  else
+    y_passos_coordenada++;
+    if(y_passos_coordenada>maxY||y_passos_coordenada<=0){
+      passo_y_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoYdir,0);
-  if(b)
+    y_passos_coordenada--;
+    if(y_passos_coordenada<0||y_passos_coordenada>=maxY){
+      passo_y_permissao=false;
+    }
+  }
+  if(b){
     digitalWrite(eixoZdir,1);
-  else
+    z_passos_coordenada++;
+    if(z_passos_coordenada>maxZ||z_passos_coordenada<=0){
+      passo_z_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoZdir,0);
-  digitalWrite(eixoYstep,0);
-  digitalWrite(eixoZstep,0);
+    z_passos_coordenada--;
+    if(z_passos_coordenada<0||z_passos_coordenada>=maxZ){
+      passo_z_permissao=false;
+    }
+  }
+  if(passo_y_permissao)digitalWrite(eixoYstep,0);
+  if(passo_z_permissao)digitalWrite(eixoZstep,0);
   delay(tempo/2);
   digitalWrite(eixoYstep,1);
   digitalWrite(eixoZstep,1);
@@ -104,21 +212,54 @@ void eixoYZ(boolean a, boolean b, int tempo){
 }
 void eixoXYZ(boolean a, boolean b, boolean c, int tempo){
   if(tempo<2)tempo=2;
-  if(a)
+  boolean passo_x_permissao = true;
+  boolean passo_y_permissao = true;
+  boolean passo_z_permissao = true;
+  if(a){
     digitalWrite(eixoXdir,1);
-  else
+    x_passos_coordenada++;
+    if(x_passos_coordenada>maxX||x_passos_coordenada<=0){
+      passo_x_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoXdir,0);
-  if(b)
+    x_passos_coordenada--;
+    if(x_passos_coordenada<0||x_passos_coordenada>=maxX){
+      passo_x_permissao=false;
+    }
+  }
+  if(b){
     digitalWrite(eixoYdir,1);
-  else
+    y_passos_coordenada++;
+    if(y_passos_coordenada>maxY||y_passos_coordenada<=0){
+      passo_y_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoYdir,0);
-  if(c)
+    y_passos_coordenada--;
+    if(y_passos_coordenada<0||y_passos_coordenada>=maxY){
+      passo_y_permissao=false;
+    }
+  }
+  if(c){
     digitalWrite(eixoZdir,1);
-  else
+    z_passos_coordenada++;
+    if(z_passos_coordenada>maxZ||z_passos_coordenada<=0){
+      passo_z_permissao=false;
+    }
+  }
+  else{
     digitalWrite(eixoZdir,0);
-  digitalWrite(eixoXstep,0);
-  digitalWrite(eixoYstep,0);
-  digitalWrite(eixoZstep,0);
+    z_passos_coordenada--;
+    if(z_passos_coordenada<0||z_passos_coordenada>=maxZ){
+      passo_z_permissao=false;
+    }
+  }
+  if(passo_x_permissao)digitalWrite(eixoXstep,0);
+  if(passo_y_permissao)digitalWrite(eixoYstep,0);
+  if(passo_z_permissao)digitalWrite(eixoZstep,0);
   delay(tempo/2);
   digitalWrite(eixoXstep,1);
   digitalWrite(eixoYstep,1);

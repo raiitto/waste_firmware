@@ -15,7 +15,11 @@ void step_extrusora(int tempo){
 }
 
 void extrudar(float milimetros, int tempo){
-  if(milimetros<=0){
+  if(!g_relative_extruder){
+    milimetros=milimetros-g_cordenada_extruder;
+  }
+  if(milimetros<=0||x_passos_coordenada>maxX||y_passos_coordenada>maxY||y_passos_coordenada>maxZ||
+  x_passos_coordenada<0||y_passos_coordenada<0||y_passos_coordenada<0){
     delay(tempo);
     return;
   }
@@ -24,4 +28,5 @@ void extrudar(float milimetros, int tempo){
   for(int x = 0;x<passos;x++){
     step_extrusora(tempo_por_passo);
   }
+  g_cordenada_extruder+=milimetros;
 }

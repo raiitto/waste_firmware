@@ -1,31 +1,30 @@
 char* g4(char* parametros){
-  /*
-  int x =0;
-  while(x<tamanho){
-    if(buff[x]=='P'){
-      x++;
-      int y=x;
-      int cont=0;
-      while(true){
-        if(buff[y]==' '||buff[y]=='\n')break;
-        y++;
-        cont++;
-      }
-      char* buffTimer = new char[cont];
-      cont=0;
-      while(true){
-        if(buff[x]==' '||buff[x]=='\n')break;
-        buffTimer[cont]=buff[x];
-        x++;
-        cont++;
-      }
-      int esperar = atof(buffTimer);
-      Serial.print("esperando: ");
-      Serial.print(esperar);
-      Serial.println("ms");
-      delay(esperar);
+  int Pnnn = nao_iniciado;//Time to wait, in milliseconds
+  int Snnn = nao_iniciado;//Time to wait, in seconds
+  
+  while (parametros != 0)
+  {
+    String parametro = parametros;
+    if(parametro.indexOf("P")>0){
+      ++parametros;//Avancar uma posicao na memoria
+      Pnnn=atoi(parametros);
+    }else if(parametro.indexOf("S")>0){
+      ++parametros;//Avancar uma posicao na memoria
+      Snnn=atoi(parametros);
     }
-    x++;
+    parametros = strtok(0, " ");//Encontrar o proximo parametro
   }
-  */
+  int tempo_total = 0;
+  if(Pnnn!=nao_iniciado){
+    tempo_total+=Pnnn;
+  }
+  if(Snnn!=nao_iniciado){
+    tempo_total+=Snnn*1000;
+  }
+  for(int x = 0;x<tempo_total/10;x++){
+    delay(10);
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
+  }
+  String retorno = "ok";
+  return (char*)retorno.c_str();
 }

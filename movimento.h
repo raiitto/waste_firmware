@@ -11,6 +11,12 @@ char* moveTo(float x, float y, float z, int tempo, float extrudar){
   int passos_x = round((x-g_x)/tamanho_passo_eixo_x);//Conversao mm to step
   int passos_y = round((y-g_y)/tamanho_passo_eixo_y);//Conversao mm to step
   int passos_z = round((z-g_z)/tamanho_passo_eixo_z);//Conversao mm to step
+  if(g_polegadas){
+    int passos_x = round(((x-g_x)*25.4)/tamanho_passo_eixo_x);//Conversao polegadas to step
+    int passos_y = round(((y-g_y)*25.4)/tamanho_passo_eixo_y);//Conversao polegadas to step
+    int passos_z = round(((z-g_z)*25.4)/tamanho_passo_eixo_z);//Conversao polegadas to step
+    extrudar*=25.4;
+  }
   if(passos_x<0){//Direcionamento X
     direcao_x = false;
   }
@@ -69,6 +75,7 @@ void moverComMaximoX(int x_passos, int y_passos, int z_passos, boolean direcao_x
   boolean passo_y = false;
   boolean passo_z = false;
   for(int x=1;x<=x_passos;x++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     if(x>cont_y*x_por_y&&cont_y<y_passos){
       passo_y=true;
       cont_y++;

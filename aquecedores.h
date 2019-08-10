@@ -38,23 +38,42 @@ void setup_aquecedores(){
   pinMode(pino_ventoinha_base, OUTPUT);
 }
 
+long ultima_leitura = 0;
+int contador_leituras = 0;
+float media_extrusora = 0;
+float media_base = 0;
 void loop_aquecedores(){
-  int temp_extrusora = temperaturaExtrusora();
-  int temp_base = temperaturaBase();
+  if(contador_leituras==0){
+    media_extrusora = 0;
+    media_base = 0;
+  }
+  if(millis()-ultima_leitura>=10){
+    float temp_extrusora = temperaturaExtrusora();
+    float temp_base = temperaturaBase();
+    ultima_leitura=millis();
+    contador_leituras++;
+    media_extrusora+=temp_extrusora/10;
+    media_base+=temp_base/10;
+  }
+  if(contador_leituras<10){
+    return;
+  }else{
+    contador_leituras=0;
+  }
 
   if(aquecedor_extrusora_ativado==false){
     digitalWrite(pino_aquecedor_extrusora, rele_off);//Desligar tudo
     digitalWrite(pino_ventoinha_extrusora, rele_off);
-  }else if(temp_extrusora>=temperatura_maxima){
+  }else if(media_extrusora>=temperatura_maxima){
     digitalWrite(pino_aquecedor_extrusora, rele_off);
     digitalWrite(pino_ventoinha_extrusora, rele_on);
-  }else if(temp_extrusora>temperatura_extrusora+tolerancia_refrigeracao){
+  }else if(media_extrusora>temperatura_extrusora+tolerancia_refrigeracao){
     digitalWrite(pino_aquecedor_extrusora, rele_off);
     digitalWrite(pino_ventoinha_extrusora, rele_on);
-  }else if(temp_extrusora>temperatura_extrusora+maxima_exedencia_temperatura){
+  }else if(media_extrusora>temperatura_extrusora+maxima_exedencia_temperatura){
     digitalWrite(pino_aquecedor_extrusora, rele_off);
     digitalWrite(pino_ventoinha_extrusora, rele_off);
-  }else if(temp_extrusora<temperatura_extrusora-tolerancia){
+  }else if(media_extrusora<temperatura_extrusora-tolerancia){
     digitalWrite(pino_aquecedor_extrusora, rele_on);
     digitalWrite(pino_ventoinha_extrusora, rele_off);
   }
@@ -62,16 +81,16 @@ void loop_aquecedores(){
   if(aquecedor_base_ativado==false){
     digitalWrite(pino_aquecedor_base, rele_off);//Desligar tudo
     digitalWrite(pino_aquecedor_base, rele_off);
-  }else if(temp_base>=temperatura_maxima){
+  }else if(media_base>=temperatura_maxima){
     digitalWrite(pino_aquecedor_base, rele_off);
     digitalWrite(pino_ventoinha_base, rele_on);//Ligar ventoinha
-  }else if(temp_base>temperatura_base+tolerancia_refrigeracao){
+  }else if(media_base>temperatura_base+tolerancia_refrigeracao){
     digitalWrite(pino_aquecedor_base, rele_off);
     digitalWrite(pino_ventoinha_base, rele_on);//Ligar ventoinha
-  }else if(temp_base>temperatura_base+maxima_exedencia_temperatura){
+  }else if(media_base>temperatura_base+maxima_exedencia_temperatura){
     digitalWrite(pino_aquecedor_base, rele_off);//Desligar aquecedor
     digitalWrite(pino_ventoinha_base, rele_off);
-  }else if(temp_base<temperatura_base-tolerancia){
+  }else if(media_base<temperatura_base-tolerancia){
     digitalWrite(pino_aquecedor_base, rele_on);//Ligar aquecedor
     digitalWrite(pino_ventoinha_base, rele_off);
   }

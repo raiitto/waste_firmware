@@ -30,77 +30,29 @@ char* g1(char* parametros){//Movimento linear
     }
     parametros = strtok(0, " ");//Encontrar o proximo parametro
   }
+  if(Xnnn==nao_iniciado&&Ynnn==nao_iniciado&&Znnn==nao_iniciado){
+    if(Fnnn!=nao_iniciado){
+      g_feedrate = Fnnn;
+    }
+    String retorno = "ok";
+    return (char*)retorno.c_str();
+  }
   if(g_relative){
     Xnnn = Xnnn!=nao_iniciado?g_x+Xnnn:g_x;
     Ynnn = Ynnn!=nao_iniciado?g_y+Ynnn:g_y;
     Znnn = Znnn!=nao_iniciado?g_z+Znnn:g_z;
+  }else{
+    Xnnn = Xnnn!=nao_iniciado?Xnnn:g_x;
+    Ynnn = Ynnn!=nao_iniciado?Ynnn:g_y;
+    Znnn = Znnn!=nao_iniciado?Znnn:g_z;
   }
   float total_mm = abs(g_x-Xnnn);
   total_mm += abs(g_y-Ynnn);
   total_mm += abs(g_z-Znnn);
   int tempo_min = total_mm/g_feedrate;
+  if(Fnnn!=nao_iniciado){
+    tempo_min = total_mm/Fnnn;
+  }
   int tempo_ms = (tempo_min*60)*1000;//Total tempo em milisegundos
   return moveTo(Xnnn,Ynnn,Znnn,tempo_ms,Ennn);//X,Y,Z,tempo,mmToExtrude
-  /*
-  while(x<tamanho){
-    if(buff[x]=='X'){
-      x++;
-      int y=x;
-      int cont=0;
-      while(buff[y]!=' '){
-        y++;
-        cont++;
-      }
-      char* buffX = new char[cont];
-      cont=0;
-      while(buff[x]!=' '){
-        buffX[cont]=buff[x];
-        x++;
-        cont++;
-      }
-      cordX =  atof(buffX);
-    }
-    else if(buff[x]=='Y'){
-      x++;
-      int y=x;
-      int cont=0;
-      while(buff[y]!=' '){
-        y++;
-        cont++;
-      }
-      char* buffY = new char[cont];
-      cont=0;
-      while(buff[x]!=' '){
-        buffY[cont]=buff[x];
-        x++;
-        cont++;
-      }
-      cordY =  atof(buffY);
-    }else if(buff[x]=='Z'){
-      x++;
-      int y=x;
-      int cont=0;
-      while(buff[y]!=' '){
-        y++;
-        cont++;
-      }
-      cont=0;
-      char* buffZ = new char[cont];
-      while(buff[x]!=' '){
-        buffZ[cont];
-        x++;
-      }
-      cordZ =  atof(buffZ);//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    }
-
-    x++;
-  }
-  moveTo(cordX,cordY);
-        Serial.print(cordX);
-        Serial.print(" ");
-        Serial.print(cordY);
-        Serial.print(" ");
-        Serial.println(cordZ);
-  }
-*/
 }

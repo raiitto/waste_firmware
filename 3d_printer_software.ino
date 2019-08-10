@@ -1,15 +1,19 @@
+#include "constantes.h"
+#include "variaveis.h"
+
 #include "eixos.h"
 #include "aquecedores.h"
 #include "extrusora.h"
 
-#include "constantes.h"
-#include "variaveis.h"
 #include "movimento.h"
 #include "g1.h"
 #include "g4.h"
+#include "g20.h"
+#include "g21.h"
+#include "g28.h"
 #include "g92.h"
-#include "m17.h"
-#include "m18.h"
+#include "m82.h"
+#include "m83.h"
 #include "m300.h"
 
 
@@ -62,22 +66,30 @@ void loop() {
       }else if(comando_g4.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g4(parametro);
+      }else if(comando_g20.indexOf(comando)>0){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = g4(parametro);
+      }else if(comando_g21.indexOf(comando)>0){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = g4(parametro);
+      }else if(comando_g28.indexOf(comando)>0){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = g4(parametro);
       }else if(comando_g92.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        //retorno = g92(parametro);
-        retorno = "ok";
+        retorno = g92(parametro);
       }else if(comando_g92_1.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        //retorno = g92(parametro);
-        retorno = "ok";
+        retorno = g92(parametro);
       }else if(comando_g92_2.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        //retorno = g92(parametro);
-        retorno = "ok";
-      }else if(comando_m0.indexOf(comando)>0){
+        retorno = g92(parametro);
+      }else if(comando_m82.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        //retorno = m0(parametro);
-        retorno = "ok";
+        retorno = m82(parametro);
+      }else if(comando_m83.indexOf(comando)>0){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = m83(parametro);
       }else if(comando_m104.indexOf(comando)>0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         //retorno = m104(parametro);
