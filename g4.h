@@ -5,10 +5,10 @@ char* g4(char* parametros){
   while (parametros != 0)
   {
     String parametro = parametros;
-    if(parametro.indexOf("P")>0){
+    if(parametro.indexOf("P")>=0){
       ++parametros;//Avancar uma posicao na memoria
       Pnnn=atoi(parametros);
-    }else if(parametro.indexOf("S")>0){
+    }else if(parametro.indexOf("S")>=0){
       ++parametros;//Avancar uma posicao na memoria
       Snnn=atoi(parametros);
     }

@@ -5,11 +5,11 @@ char* g28(char* parametros){
   while (parametros != 0)
   {
     String parametro = parametros;
-    if(parametro.indexOf("X")>0){
+    if(parametro.indexOf("X")>=0){
       X=true;
-    }else if(parametro.indexOf("Y")>0){
+    }else if(parametro.indexOf("Y")>=0){
       Y=true;
-    }else if(parametro.indexOf("Z")>0){
+    }else if(parametro.indexOf("Z")>=0){
       Z=true;
     }
     parametros = strtok(0, " ");//Encontrar o proximo parametro

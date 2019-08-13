@@ -12,19 +12,19 @@ char* g1(char* parametros){//Movimento linear
   while (parametros != 0)
   {
     String parametro = parametros;
-    if(parametro.indexOf("X")>0){
+    if(parametro.indexOf("X")>=0){
       ++parametros;//Avancar uma posicao na memoria
       Xnnn=atof(parametros);
-    }else if(parametro.indexOf("Y")>0){
+    }else if(parametro.indexOf("Y")>=0){
       ++parametros;//Avancar uma posicao na memoria
       Ynnn=atof(parametros);
-    }else if(parametro.indexOf("Z")>0){
+    }else if(parametro.indexOf("Z")>=0){
       ++parametros;//Avancar uma posicao na memoria
       Znnn=atof(parametros);
-    }else if(parametro.indexOf("E")>0){
+    }else if(parametro.indexOf("E")>=0){
       ++parametros;//Avancar uma posicao na memoria
       Ennn=atof(parametros);
-    }else if(parametro.indexOf("F")>0){
+    }else if(parametro.indexOf("F")>=0){
       ++parametros;//Avancar uma posicao na memoria
       Fnnn=atof(parametros);
     }

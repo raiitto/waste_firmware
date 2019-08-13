@@ -14,7 +14,12 @@
 #include "g92.h"
 #include "m82.h"
 #include "m83.h"
-#include "m300.h"
+#include "m104.h"
+#include "m105.h"
+#include "m109.h"
+#include "m140.h"
+#include "m190.h"
+#include "m999.h"
 
 
 
@@ -37,6 +42,17 @@ void loop() {
   tamanho=0;
   
   while(tamanho<100){
+    loop_aquecedores();
+    /*
+    Serial.print("Extrusora: ");
+    Serial.print(temperaturaExtrusora());
+    Serial.print("/");
+    Serial.println(analogRead(pino_termistor_extrusora));
+    Serial.print("Base: ");
+    Serial.print(temperaturaBase());
+    Serial.print("/");
+    Serial.println(analogRead(pino_termistor_base));
+    /**/
     if(Serial.available()){
       byte leitura = Serial.read();
       if(leitura =='^'){
@@ -58,57 +74,57 @@ void loop() {
     char* parametro;
     while (comando != 0)
     {
-      if(comando_g0.indexOf(comando)>0){
+      if(comando_g0.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g1(parametro);
-    Serial.println("comando G0");
-      }else if(comando_g1.indexOf(comando)>0){
+      }else if(comando_g1.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g1(parametro);
-    Serial.println("comando G1");
-      }else if(comando_g4.indexOf(comando)>0){
+      }else if(comando_g4.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g4(parametro);
-      }else if(comando_g20.indexOf(comando)>0){
+      }else if(comando_g20.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g4(parametro);
-      }else if(comando_g21.indexOf(comando)>0){
+      }else if(comando_g21.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g4(parametro);
-      }else if(comando_g28.indexOf(comando)>0){
+      }else if(comando_g28.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g4(parametro);
-      }else if(comando_g92.indexOf(comando)>0){
+      }else if(comando_g92.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g92(parametro);
-      }else if(comando_g92_1.indexOf(comando)>0){
+      }else if(comando_g92_1.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g92(parametro);
-      }else if(comando_g92_2.indexOf(comando)>0){
+      }else if(comando_g92_2.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g92(parametro);
-      }else if(comando_m82.indexOf(comando)>0){
+      }else if(comando_m82.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m82(parametro);
-      }else if(comando_m83.indexOf(comando)>0){
+      }else if(comando_m83.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m83(parametro);
-      }else if(comando_m104.indexOf(comando)>0){
+      }else if(comando_m104.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        //retorno = m104(parametro);
-        retorno = "ok";
-      }else if(comando_m109.indexOf(comando)>0){
+        retorno = m104(parametro);
+      }else if(comando_m105.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        //retorno = m109(parametro);
-        retorno = "ok";
-      }else if(comando_m140.indexOf(comando)>0){
+        retorno = m105(parametro);
+      }else if(comando_m109.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        //retorno = m140(parametro);
-        retorno = "ok";
-      }else if(comando_m190.indexOf(comando)>0){
+        retorno = m109(parametro);
+      }else if(comando_m140.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        //retorno = m190(parametro);
-        retorno = "ok";
+        retorno = m140(parametro);
+      }else if(comando_m190.indexOf(comando)>=0){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = m190(parametro);
+      }else if(comando_m999.indexOf(comando)>=0){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = m999(parametro);
       }else{
         retorno = "ok";
       }
@@ -116,4 +132,5 @@ void loop() {
     }
     Serial.println(retorno);// can be ok, rs or !!.   ok, resend, hardware error
   }
+  delay(10);
 }
