@@ -16,6 +16,8 @@
 #include "m83.h"
 #include "m104.h"
 #include "m105.h"
+#include "m106.h"
+#include "m107.h"
 #include "m109.h"
 #include "m140.h"
 #include "m190.h"
@@ -113,6 +115,12 @@ void loop() {
       }else if(comando_m105.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m105(parametro);
+      }else if(comando_m106.indexOf(comando)>=0){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = m106(parametro);
+      }else if(comando_m107.indexOf(comando)>=0){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = m107(parametro);
       }else if(comando_m109.indexOf(comando)>=0){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m109(parametro);
