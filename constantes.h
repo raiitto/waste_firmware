@@ -20,6 +20,7 @@ String comando_m82 = "M82";//absolute mode extruder @IMPLEMENTADO
 String comando_m83 = "M83";//relative mode extruder @IMPLEMENTADO
 String comando_m104 = "M104";//Set extruder temperature @IMPLEMENTADO
 String comando_m105 = "M105";//Get Extruder Temperature @IMPLEMENTADO
+String comando_m106 = "M106";//Desligar ventoinha @IMPLEMENTADO
 String comando_m107 = "M107";//Desligar ventoinha @IMPLEMENTADO
 String comando_m109 = "M109";//M104 e esperar @IMPLEMENTADO
 String comando_m140 = "M140";//definir temperatura da mesa @IMPLEMENTADO
