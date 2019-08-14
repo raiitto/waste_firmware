@@ -76,61 +76,61 @@ void loop() {
     char* parametro;
     while (comando != 0)
     {
-      if(comando_g0.indexOf(comando)>=0){
+      if(comando_g0.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g1(parametro);
-      }else if(comando_g1.indexOf(comando)>=0){
+      }else if(comando_g1.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g1(parametro);
-      }else if(comando_g4.indexOf(comando)>=0){
+      }else if(comando_g4.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g4(parametro);
-      }else if(comando_g20.indexOf(comando)>=0){
+      }else if(comando_g20.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        retorno = g4(parametro);
-      }else if(comando_g21.indexOf(comando)>=0){
+        retorno = g20(parametro);
+      }else if(comando_g21.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        retorno = g4(parametro);
-      }else if(comando_g28.indexOf(comando)>=0){
+        retorno = g21(parametro);
+      }else if(comando_g28.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
-        retorno = g4(parametro);
-      }else if(comando_g92.indexOf(comando)>=0){
+        retorno = g28(parametro);
+      }else if(comando_g92.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g92(parametro);
-      }else if(comando_g92_1.indexOf(comando)>=0){
+      }else if(comando_g92_1.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g92(parametro);
-      }else if(comando_g92_2.indexOf(comando)>=0){
+      }else if(comando_g92_2.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g92(parametro);
-      }else if(comando_m82.indexOf(comando)>=0){
+      }else if(comando_m82.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m82(parametro);
-      }else if(comando_m83.indexOf(comando)>=0){
+      }else if(comando_m83.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m83(parametro);
-      }else if(comando_m104.indexOf(comando)>=0){
+      }else if(comando_m104.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m104(parametro);
-      }else if(comando_m105.indexOf(comando)>=0){
+      }else if(comando_m105.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m105(parametro);
-      }else if(comando_m106.indexOf(comando)>=0){
+      }else if(comando_m106.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m106(parametro);
-      }else if(comando_m107.indexOf(comando)>=0){
+      }else if(comando_m107.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m107(parametro);
-      }else if(comando_m109.indexOf(comando)>=0){
+      }else if(comando_m109.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m109(parametro);
-      }else if(comando_m140.indexOf(comando)>=0){
+      }else if(comando_m140.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m140(parametro);
-      }else if(comando_m190.indexOf(comando)>=0){
+      }else if(comando_m190.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m190(parametro);
-      }else if(comando_m999.indexOf(comando)>=0){
+      }else if(comando_m999.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m999(parametro);
       }else{

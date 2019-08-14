@@ -1,4 +1,4 @@
-char* g28(char* parametros){
+String g28(char* parametros){
   boolean X = false;//Flag to go back to the X axis origin
   boolean Y = false;//Flag to go back to the Y axis origin
   boolean Z = false;//Flag to go back to the Z axis origin
@@ -32,5 +32,5 @@ char* g28(char* parametros){
     moveTo(x_cord_temp,y_cord_temp,z_cord_temp,  0,  0);
   }
   String retorno = "ok";
-  return (char*)retorno.c_str();
+  return retorno;
 }

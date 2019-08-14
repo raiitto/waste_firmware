@@ -1,4 +1,4 @@
-char* m190(char* parametros){
+String m190(char* parametros){
   int Rnnn = nao_iniciado;//minimum target temperature, waits until heating
   int Snnn = nao_iniciado;//maximum target temperature, waits until cooling (Sprinter)
   while (parametros != 0)
@@ -56,5 +56,5 @@ char* m190(char* parametros){
   }
   String retorno = "ok";
   if(count>3000)retorno="!!";
-  return (char*)retorno.c_str();
+  return retorno;
 }

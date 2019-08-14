@@ -1,4 +1,4 @@
-char* m105(char* parametros){
+String m105(char* parametros){
   int Rnnn = nao_iniciado;//Response sequence number1
   int Snnn = nao_iniciado;//Response type1
   while (parametros != 0)
@@ -19,5 +19,5 @@ char* m105(char* parametros){
   }else{
     retorno = (String)"ok T:"+ultima_media_extrusora+(String)" B:"+ultima_media_base;
   }
-  return (char*)retorno.c_str();
+  return retorno;
 }

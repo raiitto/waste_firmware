@@ -1,4 +1,4 @@
-char* m140(char* parametros){
+String m140(char* parametros){
   int Snnn = nao_iniciado;//Target temperature
   while (parametros != 0)
   {
@@ -16,5 +16,5 @@ char* m140(char* parametros){
     ativar_base();
   }
   String retorno = "ok";
-  return (char*)retorno.c_str();
+  return retorno;
 }

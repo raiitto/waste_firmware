@@ -1,4 +1,4 @@
-char* g92(char* parametros){
+String g92(char* parametros){
   float Xnnn = nao_iniciado;//The position to move to on the X axis
   float Ynnn = nao_iniciado;//The position to move to on the Y axis
   float Znnn = nao_iniciado;//The position to move to on the Z axis
@@ -27,7 +27,7 @@ char* g92(char* parametros){
     g_x=0;
     g_y=0;
     g_z=0;
-    return (char*)retorno.c_str();
+    return retorno;
   }
   if(Xnnn!=nao_iniciado){
     g_x=Xnnn;

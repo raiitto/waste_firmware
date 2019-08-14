@@ -1,4 +1,4 @@
-char* g1(char* parametros){//Movimento linear
+String g1(char* parametros){//Movimento linear
   int x = 0;
   float cordX=0;
   float cordY=0;
@@ -35,7 +35,7 @@ char* g1(char* parametros){//Movimento linear
       g_feedrate = Fnnn;
     }
     String retorno = "ok";
-    return (char*)retorno.c_str();
+    return retorno;
   }
   if(g_relative){
     Xnnn = Xnnn!=nao_iniciado?g_x+Xnnn:g_x;

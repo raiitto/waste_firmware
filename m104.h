@@ -1,4 +1,4 @@
-char* m104(char* parametros){
+String m104(char* parametros){
   int Snnn = nao_iniciado;//Target temperature
   while (parametros != 0)
   {
@@ -16,5 +16,5 @@ char* m104(char* parametros){
     ativar_extrusora();
   }
   String retorno = "ok";
-  return (char*)retorno.c_str();
+  return retorno;
 }

@@ -1,4 +1,4 @@
-char* m106(char* parametros){
+String m106(char* parametros){
   int Pnnn = nao_iniciado;//Fan number (optional, defaults to 0)2
   float Snnn = nao_iniciado;//Fan speed (0 to 255; RepRapFirmware also accepts 0.0 to 1.0))
   while (parametros != 0)
@@ -19,5 +19,5 @@ char* m106(char* parametros){
     desativar_ventoinha_extrusora();
   }
   String retorno = "ok";
-  return (char*)retorno.c_str();
+  return retorno;
 }

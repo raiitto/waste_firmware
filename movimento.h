@@ -4,7 +4,7 @@ void moverComMaximoX(int x_passos, int y_passos, int z_passos, boolean direcao_x
 void moverComMaximoY(int x_passos, int y_passos, int z_passos, boolean direcao_x, boolean direcao_y, boolean direcao_z,int tempo, float extrudar);
 void moverComMaximoZ(int x_passos, int y_passos, int z_passos, boolean direcao_x, boolean direcao_y, boolean direcao_z,int tempo, float extrudar);
 
-char* moveTo(float x, float y, float z, int tempo, float extrudar){
+String moveTo(float x, float y, float z, int tempo, float extrudar){
   boolean direcao_x = true;
   boolean direcao_y = true;
   boolean direcao_z = true;
@@ -46,7 +46,7 @@ char* moveTo(float x, float y, float z, int tempo, float extrudar){
       retorno = "rs";
       break;
   }
-  return (char*)retorno.c_str();
+  return retorno;
 }
 
 int maximoDe(float x, int y, int z){

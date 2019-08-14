@@ -1,4 +1,4 @@
-char* g4(char* parametros){
+String g4(char* parametros){
   int Pnnn = nao_iniciado;//Time to wait, in milliseconds
   int Snnn = nao_iniciado;//Time to wait, in seconds
   
@@ -26,5 +26,5 @@ char* g4(char* parametros){
     loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
   }
   String retorno = "ok";
-  return (char*)retorno.c_str();
+  return retorno;
 }
