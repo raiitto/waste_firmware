@@ -10,8 +10,8 @@ float tamanho_passo_eixo_y = 0.25;
 float tamanho_passo_eixo_z = 0.25;
 
 #define maxX 78 //Quantidade maxima de passos no eixo X
-#define maxY 78 //Quantidade maxima de passos no eixo X
-#define maxZ 78 //Quantidade maxima de passos no eixo X
+#define maxY 78 //Quantidade maxima de passos no eixo Y
+#define maxZ 78 //Quantidade maxima de passos no eixo Z
 
 int x_passos_coordenada = 0;
 int y_passos_coordenada = 0;
