@@ -74,6 +74,7 @@ void moverComMaximoX(int x_passos, int y_passos, int z_passos, boolean direcao_x
   float x_por_z = x_passos/z_passos;
   int cont_y = 0;
   int cont_z = 0;
+  int cont_extrusao = 0;
   boolean passo_y = false;
   boolean passo_z = false;
   for(int x=1;x<=x_passos;x++){
@@ -87,27 +88,30 @@ void moverComMaximoX(int x_passos, int y_passos, int z_passos, boolean direcao_x
       cont_z++;
     }
     if(passo_y&&passo_z){
-      extrudar(extrusao_por_passo*3,0);
+      extrudar(extrusao_por_passo*3,0);cont_extrusao+=extrusao_por_passo*3;
       eixoXYZ(direcao_x,direcao_y,direcao_z,tempo_por_passo*3);
     }else if(passo_y){
-      extrudar(extrusao_por_passo*2,0);
+      extrudar(extrusao_por_passo*2,0);cont_extrusao+=extrusao_por_passo*2;
       eixoXY(direcao_x,direcao_y,tempo_por_passo*2);
     }else if(passo_z){
-      extrudar(extrusao_por_passo*2,0);
+      extrudar(extrusao_por_passo*2,0);cont_extrusao+=extrusao_por_passo*2;
       eixoXZ(direcao_x,direcao_z,tempo_por_passo*2);
     }else{
-      extrudar(extrusao_por_passo,0);
+      extrudar(extrusao_por_passo,0);cont_extrusao+=extrusao_por_passo;
       eixoX(direcao_x,tempo_por_passo);
     }
     passo_y=false;
     passo_z=false;
   }
   //Descarregar resto de passos
+  for(;cont_extrusao<qtd_extrudar;cont_extrusao+=extrusao_por_passo){
+      extrudar(extrusao_por_passo,0);
+  }
   for(;cont_y<y_passos;cont_y++){
     eixoY(direcao_y,tempo_por_passo);
   }
   for(;cont_z<z_passos;cont_z++){
-    eixoZ(direcao_y,tempo_por_passo);
+    eixoZ(direcao_z,tempo_por_passo);
   }
 }
 void moverComMaximoY(int x_passos, int y_passos, int z_passos, boolean direcao_x, boolean direcao_y, boolean direcao_z,int tempo, float qtd_extrudar){
@@ -117,6 +121,7 @@ void moverComMaximoY(int x_passos, int y_passos, int z_passos, boolean direcao_x
   float y_por_z = y_passos/z_passos;
   int cont_x = 0;
   int cont_z = 0;
+  int cont_extrusao = 0;
   boolean passo_x = false;
   boolean passo_z = false;
   for(int y=1;y<=y_passos;y++){
@@ -129,22 +134,25 @@ void moverComMaximoY(int x_passos, int y_passos, int z_passos, boolean direcao_x
       cont_z++;
     }
     if(passo_x&&passo_z){
-      extrudar(extrusao_por_passo*3,0);
+      extrudar(extrusao_por_passo*3,0);cont_extrusao+=extrusao_por_passo*3;
       eixoXYZ(direcao_x,direcao_y,direcao_z,tempo_por_passo*3);
     }else if(passo_x){
-      extrudar(extrusao_por_passo*2,0);
+      extrudar(extrusao_por_passo*2,0);cont_extrusao+=extrusao_por_passo*2;
       eixoXY(direcao_x,direcao_y,tempo_por_passo*2);
     }else if(passo_z){
-      extrudar(extrusao_por_passo*2,0);
+      extrudar(extrusao_por_passo*2,0);cont_extrusao+=extrusao_por_passo*2;
       eixoYZ(direcao_y,direcao_z,tempo_por_passo*2);
     }else{
-      extrudar(extrusao_por_passo,0);
+      extrudar(extrusao_por_passo,0);cont_extrusao+=extrusao_por_passo;
       eixoY(direcao_y,tempo_por_passo);
     }
     passo_x=false;
     passo_z=false;
   }
   //Descarregar resto de passos
+  for(;cont_extrusao<qtd_extrudar;cont_extrusao+=extrusao_por_passo){
+      extrudar(extrusao_por_passo,0);
+  }
   for(;cont_x<x_passos;cont_x++){
     eixoX(direcao_x,tempo_por_passo);
   }
@@ -159,6 +167,7 @@ void moverComMaximoZ(int x_passos, int y_passos, int z_passos, boolean direcao_x
   float z_por_y = z_passos/y_passos;
   int cont_x = 0;
   int cont_y = 0;
+  int cont_extrusao = 0;
   boolean passo_x = false;
   boolean passo_y = false;
   for(int z=1;z<=z_passos;z++){
@@ -171,22 +180,25 @@ void moverComMaximoZ(int x_passos, int y_passos, int z_passos, boolean direcao_x
       cont_y++;
     }
     if(passo_x&&passo_y){
-      extrudar(extrusao_por_passo*3,0);
+      extrudar(extrusao_por_passo*3,0);cont_extrusao+=extrusao_por_passo*3;
       eixoXYZ(direcao_x,direcao_y,direcao_z,tempo_por_passo*3);
     }else if(passo_x){
-      extrudar(extrusao_por_passo*2,0);
+      extrudar(extrusao_por_passo*2,0);cont_extrusao+=extrusao_por_passo*2;
       eixoXZ(direcao_x,direcao_z,tempo_por_passo*2);
     }else if(passo_y){
-      extrudar(extrusao_por_passo*2,0);
+      extrudar(extrusao_por_passo*2,0);cont_extrusao+=extrusao_por_passo*2;
       eixoYZ(direcao_y,direcao_z,tempo_por_passo*2);
     }else{
-      extrudar(extrusao_por_passo,0);
+      extrudar(extrusao_por_passo,0);cont_extrusao+=extrusao_por_passo;
       eixoZ(direcao_z,tempo_por_passo);
     }
     passo_x=false;
     passo_y=false;
   }
   //Descarregar resto de passos
+  for(;cont_extrusao<qtd_extrudar;cont_extrusao+=extrusao_por_passo){
+      extrudar(extrusao_por_passo,0);
+  }
   for(;cont_x<x_passos;cont_x++){
     eixoX(direcao_x,tempo_por_passo);
   }

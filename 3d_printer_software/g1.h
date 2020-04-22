@@ -30,7 +30,7 @@ String g1(char* parametros){//Movimento linear
     }
     parametros = strtok(0, " ");//Encontrar o proximo parametro
   }
-  if(Xnnn==nao_iniciado&&Ynnn==nao_iniciado&&Znnn==nao_iniciado){
+  if(Xnnn==nao_iniciado&&Ynnn==nao_iniciado&&Znnn==nao_iniciado&&Ennn==nao_iniciado){
     if(Fnnn!=nao_iniciado){
       g_feedrate = Fnnn;
     }
@@ -54,7 +54,7 @@ String g1(char* parametros){//Movimento linear
   float total_mm = abs(g_x-Xnnn);
   total_mm += abs(g_y-Ynnn);
   total_mm += abs(g_z-Znnn);
-  int tempo_min = total_mm/g_feedrate;
+  float tempo_min = total_mm/g_feedrate;
   if(Fnnn!=nao_iniciado){
     tempo_min = total_mm/Fnnn;
   }

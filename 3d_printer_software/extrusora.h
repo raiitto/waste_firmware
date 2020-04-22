@@ -1,26 +1,26 @@
-#define extrusora_motor_pin 13
+#define extrusora_motor_pin_dir 7
 #define extrusora_motor_pin_step 6
 
 float tamanho_passo_extrusora = 0.25;
 
 void setup_extrusora(){
-  pinMode(extrusora_motor_pin, OUTPUT);
+  pinMode(extrusora_motor_pin_dir, OUTPUT);
   pinMode(extrusora_motor_pin_step, OUTPUT);
 }
 
 void step_extrusora(boolean a, int tempo){
   if(tempo<2)tempo=2;
   if(a){
-    digitalWrite(extrusora_motor_pin_step,0);
+    digitalWrite(extrusora_motor_pin_dir,HIGH);
     g_cordenada_extruder+=tamanho_passo_extrusora;
   }
   else{
-    digitalWrite(extrusora_motor_pin_step,1);
+    digitalWrite(extrusora_motor_pin_dir,LOW);
     g_cordenada_extruder-=tamanho_passo_extrusora;
   }
-  digitalWrite(eixoXstep,0);
+  digitalWrite(extrusora_motor_pin_step,0);
   delay(tempo/2);
-  digitalWrite(eixoXstep,1);
+  digitalWrite(extrusora_motor_pin_step,1);
   delay(tempo/2);
 }
 

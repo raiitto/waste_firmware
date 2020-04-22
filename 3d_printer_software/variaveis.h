@@ -1,9 +1,9 @@
 
-int g_relative = false; //true = absolute position from origin
-int g_relative_extruder = false; //true = absolute position from origin
+boolean g_relative = true; //false = absolute position from origin
+boolean g_relative_extruder = true; //false = absolute position from origin
 
-int g_feedrate_g0 = 10000; //F feedrate mm/min
-int g_feedrate = 1500; //F feedrate mm/min
+float g_feedrate_g0 = 10000; //F feedrate mm/min
+float g_feedrate = 1500; //F feedrate mm/min
 
 
 boolean g_polegadas = false;

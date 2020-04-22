@@ -4,15 +4,15 @@
 #define pino_aquecedor_base 4
 #define pino_ventoinha_base 5
 #define temperatura_maxima 300
-#define tolerancia 2
+#define tolerancia 1
 #define maxima_exedencia_temperatura 1
-#define tolerancia_refrigeracao 5
+#define tolerancia_refrigeracao 3
 
 int temperatura_extrusora = 0;//Temperatura inicial padrao
 int temperatura_base = 0;//Temperatura inicial padrao
 
-#define rele_on HIGH
-#define rele_off LOW
+#define rele_on LOW
+#define rele_off HIGH
 
 boolean aquecedor_extrusora_ativado = false;
 boolean aquecedor_base_ativado = false;

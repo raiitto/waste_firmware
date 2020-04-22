@@ -27,7 +27,8 @@ String comando_m140 = "M140";//definir temperatura da mesa @IMPLEMENTADO
 String comando_m190 = "M190";//M140 e esperar @IMPLLEMENTADO
 String comando_m300 = "M300";//Play a bip sound
 String comando_m999 = "M999";//software reset @IMPLEMENTADO
+String comando_gz = "GZ";//software reset @IMPLEMENTADO
 
-#define zPlan 66
+//#define zPlan 66
 
 #define nao_iniciado -999

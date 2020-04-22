@@ -1,6 +1,7 @@
 #include "constantes.h"
 #include "variaveis.h"
 
+#include "driver_motores.h"
 #include "eixos.h"
 #include "aquecedores.h"
 #include "extrusora.h"
@@ -22,6 +23,7 @@
 #include "m140.h"
 #include "m190.h"
 #include "m999.h"
+#include "gz.h"
 
 
 
@@ -31,7 +33,18 @@ void setup() {
   delay(10);
   Serial.println("Iniciando...");
   setup_aquecedores();
+  setup_driver();
   setup_eixos();
+  Serial.println("tamanhos dos passos");
+  Serial.print("X:");
+  Serial.print(tamanho_passo_eixo_x*1000);
+  Serial.println("µm");
+  Serial.print("Y:");
+  Serial.print(tamanho_passo_eixo_y*1000);
+  Serial.println("µm");
+  Serial.print("Z:");
+  Serial.print(tamanho_passo_eixo_z*1000);
+  Serial.println("µm");
   setup_extrusora();
   Serial.println("Pronto!");
 }
@@ -62,10 +75,11 @@ void loop() {
   if(pronto){
     // Read each command pair 
     char* comando = strtok(buff, " ");
-    String retorno = "";
+    String retorno = "ok";
     char* parametro;
     while (comando != 0)
     {
+      //Serial.println("@");
       if(comando_g0.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g1(parametro);
@@ -123,11 +137,17 @@ void loop() {
       }else if(comando_m999.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = m999(parametro);
+      }else if(comando_gz.equalsIgnoreCase(comando)){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = gz(parametro);
       }else{
         retorno = "ok";
       }
       comando = strtok(0, " ");//Encontrar o proximo parametro
     }
+    Serial.println(retorno);// can be ok, rs or !!.   ok, resend, hardware error
+  }else{
+    String retorno = "ok";
     Serial.println(retorno);// can be ok, rs or !!.   ok, resend, hardware error
   }
   delay(10);

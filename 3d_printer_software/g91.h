@@ -1,0 +1,9 @@
+String g91(char* parametros){
+  while (parametros != 0)
+  {
+    parametros = strtok(0, " ");//Encontrar o proximo parametro
+  }
+  g_relative = true; //false = absolute position from origin
+  String retorno = "ok";
+  return retorno;
+}

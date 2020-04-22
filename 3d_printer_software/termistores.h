@@ -16,11 +16,11 @@ double Thermistor(int RawADC, int resistor, double A, double B, double C) {
  Temp = 1 / (A + (B * Temp) + (C * Temp * Temp * Temp));   // Now it means both "Temporary" and "Temperature"
 
  //Temp = (Temp * 9.0)/ 5.0 + 32.0; // Convert to Fahrenheit
- return Temp;  // Return the Temperature
+ return Temp-273.15;  // Return the Temperature
 }
 
 int temperaturaExtrusora(){
- int   resistencia = 620; // Cambiar por el valor de la resistencia conocida
+ int   resistencia = 300; // Cambiar por el valor de la resistencia conocida
  double A = 0.0008270600802921212;//0.001129148
  double B = 0.0002088079087593938;//0.000234125
  double C = 8.058078989620383e-8;//0.0000000876741
@@ -30,7 +30,7 @@ int temperaturaExtrusora(){
  return temp;
 }
 int temperaturaBase(){
- int   resistencia = 620; // Cambiar por el valor de la resistencia conocida
+ int   resistencia = 30000; // Cambiar por el valor de la resistencia conocida
  double A = 0.0008270600802921212;//0.001129148
  double B = 0.0002088079087593938;//0.000234125
  double C = 8.058078989620383e-8;//0.0000000876741
