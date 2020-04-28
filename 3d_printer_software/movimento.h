@@ -68,13 +68,14 @@ int maximoDe(float x, int y, int z){
 }
 
 void moverComMaximoX(int x_passos, int y_passos, int z_passos, boolean direcao_x, boolean direcao_y, boolean direcao_z,int tempo, float qtd_extrudar){
-  int tempo_por_passo = tempo/(x_passos+y_passos+z_passos);
-  float extrusao_por_passo = qtd_extrudar/(x_passos+y_passos+z_passos);
+  int soma_dos_passos = (x_passos+y_passos+z_passos);
+  int tempo_por_passo = soma_dos_passos!=0?tempo/soma_dos_passos:0;
+  float extrusao_por_passo = soma_dos_passos!=0?qtd_extrudar/soma_dos_passos:qtd_extrudar;
   float x_por_y = x_passos/y_passos;
   float x_por_z = x_passos/z_passos;
   int cont_y = 0;
   int cont_z = 0;
-  int cont_extrusao = 0;
+  float cont_extrusao = 0;
   boolean passo_y = false;
   boolean passo_z = false;
   for(int x=1;x<=x_passos;x++){
@@ -115,13 +116,14 @@ void moverComMaximoX(int x_passos, int y_passos, int z_passos, boolean direcao_x
   }
 }
 void moverComMaximoY(int x_passos, int y_passos, int z_passos, boolean direcao_x, boolean direcao_y, boolean direcao_z,int tempo, float qtd_extrudar){
-  int tempo_por_passo = tempo/(x_passos+y_passos+z_passos);
-  float extrusao_por_passo = qtd_extrudar/(x_passos+y_passos+z_passos);
+  int soma_dos_passos = (x_passos+y_passos+z_passos);
+  int tempo_por_passo = soma_dos_passos!=0?tempo/soma_dos_passos:0;
+  float extrusao_por_passo = soma_dos_passos!=0?qtd_extrudar/soma_dos_passos:qtd_extrudar;
   float y_por_x = y_passos/x_passos;
   float y_por_z = y_passos/z_passos;
   int cont_x = 0;
   int cont_z = 0;
-  int cont_extrusao = 0;
+  float cont_extrusao = 0;
   boolean passo_x = false;
   boolean passo_z = false;
   for(int y=1;y<=y_passos;y++){
@@ -161,13 +163,14 @@ void moverComMaximoY(int x_passos, int y_passos, int z_passos, boolean direcao_x
   }
 }
 void moverComMaximoZ(int x_passos, int y_passos, int z_passos, boolean direcao_x, boolean direcao_y, boolean direcao_z,int tempo, float qtd_extrudar){
-  int tempo_por_passo = tempo/(x_passos+y_passos+z_passos);
-  float extrusao_por_passo = qtd_extrudar/(x_passos+y_passos+z_passos);
+  int soma_dos_passos = (x_passos+y_passos+z_passos);
+  int tempo_por_passo = soma_dos_passos!=0?tempo/soma_dos_passos:0;
+  float extrusao_por_passo = soma_dos_passos!=0?qtd_extrudar/soma_dos_passos:qtd_extrudar;
   float z_por_x = z_passos/x_passos;
   float z_por_y = z_passos/y_passos;
   int cont_x = 0;
   int cont_y = 0;
-  int cont_extrusao = 0;
+  float cont_extrusao = 0;
   boolean passo_x = false;
   boolean passo_y = false;
   for(int z=1;z<=z_passos;z++){

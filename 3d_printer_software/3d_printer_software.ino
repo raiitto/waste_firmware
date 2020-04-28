@@ -12,6 +12,8 @@
 #include "g20.h"
 #include "g21.h"
 #include "g28.h"
+#include "g90.h"
+#include "g91.h"
 #include "g92.h"
 #include "m82.h"
 #include "m83.h"
@@ -98,6 +100,12 @@ void loop() {
       }else if(comando_g28.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g28(parametro);
+      }else if(comando_g90.equalsIgnoreCase(comando)){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = g90(parametro);
+      }else if(comando_g91.equalsIgnoreCase(comando)){
+        parametro = strtok(0, " ");//Encontrar o proximo parametro
+        retorno = g91(parametro);
       }else if(comando_g92.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
         retorno = g92(parametro);
