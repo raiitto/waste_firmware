@@ -14,6 +14,17 @@ String g28(char* parametros){
     }
     parametros = strtok(0, " ");//Encontrar o proximo parametro
   }
+  while(!endX()){
+    passoXsemContabilizar(false,10);
+  }
+  while(!endZ()){
+    passoZsemContabilizar(false,10);
+  }
+  while(!endY()){
+    passoYsemContabilizar(false,10);
+  }
+  delay(3000);
+  gz(0);
   if(!X&&!Y&&!Z){
     moveTo(0,0,0,  0,  0);
   }else{

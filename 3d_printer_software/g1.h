@@ -57,7 +57,11 @@ String g1(char* parametros){//Movimento linear
   float tempo_min = total_mm/g_feedrate;
   if(Fnnn!=nao_iniciado){
     tempo_min = total_mm/Fnnn;
+    g_feedrate = Fnnn;
   }
   int tempo_ms = (tempo_min*60)*1000;//Total tempo em milisegundos
+  //Serial.print("X: ");Serial.print(g_x);Serial.print("  ");
+  //Serial.print("Y: ");Serial.print(g_x);Serial.print("  ");
+  //Serial.print("Z: ");Serial.print(g_x);Serial.println("  ");
   return moveTo(Xnnn,Ynnn,Znnn,tempo_ms,Ennn);//X,Y,Z,tempo,cordenadaExtrude
 }

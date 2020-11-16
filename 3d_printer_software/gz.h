@@ -4,7 +4,7 @@ String gz(char* parametros){
   {
     parametros = strtok(0, " ");//Encontrar o proximo parametro
   }
-  int quantidade_passos = 200;
+  int quantidade_passos = 206;
   boolean sentido = true;
   int tempo_ms = 3000;
 
@@ -12,24 +12,8 @@ String gz(char* parametros){
     passoZsemContabilizar(sentido, tempo_ms/quantidade_passos);
   }
   delay(2000);
-  eixoZ(true,10);
-  eixoZ(true,10);
+  //eixoZ(true,10);
+  //eixoZ(true,10);
   String retorno = "ok";
   return retorno;
-}
-
-
-
-void passoZsemContabilizar(boolean a,int tempo){
-  if(tempo<2)tempo=2;
-  if(a){
-    eixoZdir(1);
-  }
-  else{
-    eixoZdir(0);
-  }
-  eixoZstep(0);
-  delay(tempo/2);
-  eixoZstep(1);
-  delay(tempo/2);
 }

@@ -71,8 +71,8 @@ void moverComMaximoX(int x_passos, int y_passos, int z_passos, boolean direcao_x
   int soma_dos_passos = (x_passos+y_passos+z_passos);
   int tempo_por_passo = soma_dos_passos!=0?tempo/soma_dos_passos:0;
   float extrusao_por_passo = soma_dos_passos!=0?qtd_extrudar/soma_dos_passos:qtd_extrudar;
-  float x_por_y = x_passos/y_passos;
-  float x_por_z = x_passos/z_passos;
+  float x_por_y = (float)x_passos/(float)y_passos;
+  float x_por_z = (float)x_passos/(float)z_passos;
   int cont_y = 0;
   int cont_z = 0;
   float cont_extrusao = 0;
@@ -105,13 +105,16 @@ void moverComMaximoX(int x_passos, int y_passos, int z_passos, boolean direcao_x
     passo_z=false;
   }
   //Descarregar resto de passos
-  for(;cont_extrusao<qtd_extrudar;cont_extrusao+=extrusao_por_passo){
+  for(;cont_extrusao<fabs(qtd_extrudar);cont_extrusao+=fabs(extrusao_por_passo)){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
       extrudar(extrusao_por_passo,0);
   }
   for(;cont_y<y_passos;cont_y++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     eixoY(direcao_y,tempo_por_passo);
   }
   for(;cont_z<z_passos;cont_z++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     eixoZ(direcao_z,tempo_por_passo);
   }
 }
@@ -119,14 +122,15 @@ void moverComMaximoY(int x_passos, int y_passos, int z_passos, boolean direcao_x
   int soma_dos_passos = (x_passos+y_passos+z_passos);
   int tempo_por_passo = soma_dos_passos!=0?tempo/soma_dos_passos:0;
   float extrusao_por_passo = soma_dos_passos!=0?qtd_extrudar/soma_dos_passos:qtd_extrudar;
-  float y_por_x = y_passos/x_passos;
-  float y_por_z = y_passos/z_passos;
+  float y_por_x = (float)y_passos/(float)x_passos;
+  float y_por_z = (float)y_passos/(float)z_passos;
   int cont_x = 0;
   int cont_z = 0;
   float cont_extrusao = 0;
   boolean passo_x = false;
   boolean passo_z = false;
   for(int y=1;y<=y_passos;y++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     if(y>cont_x*y_por_x&&cont_x<x_passos){
       passo_x=true;
       cont_x++;
@@ -152,13 +156,16 @@ void moverComMaximoY(int x_passos, int y_passos, int z_passos, boolean direcao_x
     passo_z=false;
   }
   //Descarregar resto de passos
-  for(;cont_extrusao<qtd_extrudar;cont_extrusao+=extrusao_por_passo){
+  for(;cont_extrusao<fabs(qtd_extrudar);cont_extrusao+=fabs(extrusao_por_passo)){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
       extrudar(extrusao_por_passo,0);
   }
   for(;cont_x<x_passos;cont_x++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     eixoX(direcao_x,tempo_por_passo);
   }
   for(;cont_z<z_passos;cont_z++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     eixoZ(direcao_z,tempo_por_passo);
   }
 }
@@ -166,14 +173,15 @@ void moverComMaximoZ(int x_passos, int y_passos, int z_passos, boolean direcao_x
   int soma_dos_passos = (x_passos+y_passos+z_passos);
   int tempo_por_passo = soma_dos_passos!=0?tempo/soma_dos_passos:0;
   float extrusao_por_passo = soma_dos_passos!=0?qtd_extrudar/soma_dos_passos:qtd_extrudar;
-  float z_por_x = z_passos/x_passos;
-  float z_por_y = z_passos/y_passos;
+  float z_por_x = (float)z_passos/(float)x_passos;
+  float z_por_y = (float)z_passos/(float)y_passos;
   int cont_x = 0;
   int cont_y = 0;
   float cont_extrusao = 0;
   boolean passo_x = false;
   boolean passo_y = false;
   for(int z=1;z<=z_passos;z++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     if(z>cont_x*z_por_x&&cont_x<x_passos){
       passo_x=true;
       cont_x++;
@@ -199,13 +207,16 @@ void moverComMaximoZ(int x_passos, int y_passos, int z_passos, boolean direcao_x
     passo_y=false;
   }
   //Descarregar resto de passos
-  for(;cont_extrusao<qtd_extrudar;cont_extrusao+=extrusao_por_passo){
+  for(;cont_extrusao<fabs(qtd_extrudar);cont_extrusao+=fabs(extrusao_por_passo)){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
       extrudar(extrusao_por_passo,0);
   }
   for(;cont_x<x_passos;cont_x++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     eixoX(direcao_x,tempo_por_passo);
   }
   for(;cont_y<y_passos;cont_y++){
+    loop_aquecedores();//MANTER AQUECEDORES EQUILIBRADOS
     eixoY(direcao_y,tempo_por_passo);
   }
 }

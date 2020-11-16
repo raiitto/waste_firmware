@@ -4,9 +4,9 @@
 #define pino_aquecedor_base 4
 #define pino_ventoinha_base 5
 #define temperatura_maxima 300
-#define tolerancia 1
-#define maxima_exedencia_temperatura 1
-#define tolerancia_refrigeracao 3
+#define tolerancia 5
+#define maxima_exedencia_temperatura -3
+#define tolerancia_refrigeracao -5
 
 int temperatura_extrusora = 0;//Temperatura inicial padrao
 int temperatura_base = 0;//Temperatura inicial padrao
@@ -62,15 +62,13 @@ void loop_aquecedores(){
     media_base = 0;
     contador_leituras=0;
   }
-  if(millis()-ultima_leitura>=10){
     int temp_extrusora = temperaturaExtrusora();
     int temp_base = temperaturaBase();
     ultima_leitura=millis();
     contador_leituras++;
-    media_extrusora+=temp_extrusora/10.0;
-    media_base+=temp_base/10.0;
-  }
-  if(contador_leituras<10){
+    media_extrusora+=temp_extrusora/5.0;
+    media_base+=temp_base/5.0;
+  if(contador_leituras<5){
     return;
   }else{
     contador_leituras=-1;
@@ -82,15 +80,29 @@ void loop_aquecedores(){
   }else if(media_extrusora>=temperatura_maxima){
     digitalWrite(pino_aquecedor_extrusora, rele_off);
     if(ventoinha_extrusora_ativado)digitalWrite(pino_ventoinha_extrusora, rele_on);
+    digitalWrite(pino_ventoinha_extrusora, rele_on);//LIGAR INDEPENDENDE DE TUDO
   }else if(media_extrusora>temperatura_extrusora+tolerancia_refrigeracao){
     digitalWrite(pino_aquecedor_extrusora, rele_off);
-    if(ventoinha_extrusora_ativado)digitalWrite(pino_ventoinha_extrusora, rele_on);
+    if(media_extrusora>55.0){
+      if(ventoinha_extrusora_ativado)digitalWrite(pino_ventoinha_extrusora, rele_on);
+      digitalWrite(pino_ventoinha_extrusora, rele_on);//LIGAR INDEPENDENDE DE TUDO
+    }else{
+      digitalWrite(pino_ventoinha_extrusora, rele_off);//DESLIGAR SE JA FRIO
+      aquecedor_extrusora_ativado=false;
+    }
   }else if(media_extrusora>temperatura_extrusora+maxima_exedencia_temperatura){
     digitalWrite(pino_aquecedor_extrusora, rele_off);
-    digitalWrite(pino_ventoinha_extrusora, rele_off);
+    if(media_extrusora>55.0){
+      if(ventoinha_extrusora_ativado)digitalWrite(pino_ventoinha_extrusora, rele_on);
+      digitalWrite(pino_ventoinha_extrusora, rele_on);//LIGAR INDEPENDENDE DE TUDO
+    }else{
+      digitalWrite(pino_ventoinha_extrusora, rele_off);//DESLIGAR SE JA FRIO
+      aquecedor_extrusora_ativado=false;
+    }
   }else if(media_extrusora<temperatura_extrusora-tolerancia){
     digitalWrite(pino_aquecedor_extrusora, rele_on);
     digitalWrite(pino_ventoinha_extrusora, rele_off);
+    digitalWrite(pino_ventoinha_extrusora, rele_on);//LIGAR INDEPENDENDE DE TUDO
   }
   
   if(aquecedor_base_ativado==false){

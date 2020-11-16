@@ -1,6 +1,6 @@
 String m109(char* parametros){
-  int Rnnn = nao_iniciado;//minimum target temperature, waits until heating
-  int Snnn = nao_iniciado;//maximum target temperature, waits until cooling (Sprinter)
+  int Snnn = nao_iniciado;//minimum target temperature, waits until heating
+  int Rnnn = nao_iniciado;//maximum target temperature, waits until cooling (Sprinter)
   while (parametros != 0)
   {
     String parametro = parametros;
@@ -18,30 +18,30 @@ String m109(char* parametros){
     int media_das_temperaturas = (Rnnn+Snnn)/2;
     temperatura_extrusora = media_das_temperaturas;
     ativar_extrusora();
-    while(ultima_media_extrusora>Snnn||
-    ultima_media_extrusora<Rnnn){
+    while(ultima_media_extrusora<Snnn||
+    ultima_media_extrusora>Rnnn){
       loop_aquecedores();
       delay(10);
       count++;
-      if(count>3000)break;
+      if(count>18000)break;
     }
   }else if(Rnnn != nao_iniciado){
     temperatura_extrusora = Rnnn;
     ativar_extrusora();
-    while(ultima_media_extrusora<Rnnn){
+    while(ultima_media_extrusora>Rnnn){
       loop_aquecedores();
       delay(10);
       count++;
-      if(count>3000)break;
+      if(count>18000)break;
     }
   }else if(Snnn != nao_iniciado){
     temperatura_extrusora = Snnn;
     ativar_extrusora();
-    while(ultima_media_extrusora>Snnn){
+    while(ultima_media_extrusora<Snnn){
       loop_aquecedores();
       delay(10);
       count++;
-      if(count>3000)break;
+      if(count>18000)break;
     }
   }else{
     int cinco_range = 5;
@@ -51,10 +51,10 @@ String m109(char* parametros){
       loop_aquecedores();
       delay(10);
       count++;
-      if(count>3000)break;
+      if(count>18000)break;
     }
   }
   String retorno = "ok";
-  if(count>3000)retorno="!!";
+  if(count>18000)retorno="!!";
   return retorno;
 }

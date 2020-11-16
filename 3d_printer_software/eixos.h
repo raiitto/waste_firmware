@@ -6,13 +6,13 @@
 //#define eixoZstep 12
 
 
-#define tamanhoEixoX 34.0 //Quantidade maxima de mm no eixo X
-#define tamanhoEixoY 34.0 //Quantidade maxima de mm no eixo Y
-#define tamanhoEixoZ 29.6578//39.0 //Quantidade maxima de mm no eixo Z
+#define tamanhoEixoX 34.5//34.0 //Quantidade maxima de mm no eixo X
+#define tamanhoEixoY 34.5//34.0 //Quantidade maxima de mm no eixo Y
+#define tamanhoEixoZ 31.0//31.5855//39.0 //Quantidade maxima de mm no eixo Z
 
-#define maxX 229.28//263 //Quantidade maxima de passos no eixo X
-#define maxY 229.28//263 //Quantidade maxima de passos no eixo Y
-#define maxZ 200//263 //Quantidade maxima de passos no eixo Z
+#define maxX 229//229.28//263 //Quantidade maxima de passos no eixo X
+#define maxY 229//229.28//263 //Quantidade maxima de passos no eixo Y
+#define maxZ 213//263 //Quantidade maxima de passos no eixo Z
 
 double tamanho_passo_eixo_x = tamanhoEixoX/maxX;
 double tamanho_passo_eixo_y = tamanhoEixoY/maxY;
@@ -32,6 +32,45 @@ void setup_eixos(){
   //pinMode(eixoZstep, OUTPUT);
 }
 
+void passoXsemContabilizar(boolean a,int tempo){
+  if(tempo<2)tempo=2;
+  if(a){
+    eixoXdir(1);
+  }
+  else{
+    eixoXdir(0);
+  }
+  eixoXstep(0);
+  delay(tempo/2);
+  eixoXstep(1);
+  delay(tempo/2);
+}
+void passoYsemContabilizar(boolean a,int tempo){
+  if(tempo<2)tempo=2;
+  if(a){
+    eixoYdir(0);
+  }
+  else{
+    eixoYdir(1);
+  }
+  eixoYstep(0);
+  delay(tempo/2);
+  eixoYstep(1);
+  delay(tempo/2);
+}
+void passoZsemContabilizar(boolean a,int tempo){
+  if(tempo<2)tempo=2;
+  if(a){
+    eixoZdir(1);
+  }
+  else{
+    eixoZdir(0);
+  }
+  eixoZstep(0);
+  delay(tempo/2);
+  eixoZstep(1);
+  delay(tempo/2);
+}
 void eixoX(boolean a,int tempo){
   if(tempo<2)tempo=2;
   boolean passo_x_permissao = true;

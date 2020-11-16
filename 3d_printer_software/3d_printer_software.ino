@@ -1,12 +1,14 @@
 #include "constantes.h"
 #include "variaveis.h"
 
+#include "end_stop.h"
 #include "driver_motores.h"
 #include "eixos.h"
 #include "aquecedores.h"
 #include "extrusora.h"
 
 #include "movimento.h"
+#include "gz.h"
 #include "g1.h"
 #include "g4.h"
 #include "g20.h"
@@ -25,7 +27,6 @@
 #include "m140.h"
 #include "m190.h"
 #include "m999.h"
-#include "gz.h"
 
 
 
@@ -37,6 +38,7 @@ void setup() {
   setup_aquecedores();
   setup_driver();
   setup_eixos();
+  setup_end_stop();
   Serial.println("tamanhos dos passos");
   Serial.print("X:");
   Serial.print(tamanho_passo_eixo_x*1000);
@@ -47,19 +49,29 @@ void setup() {
   Serial.print("Z:");
   Serial.print(tamanho_passo_eixo_z*1000);
   Serial.println("µm");
+  Serial.print("Estrusora:");
+  Serial.print(tamanho_passo_extrusora*1000);
+  Serial.println("µm");
   setup_extrusora();
   Serial.println("Pronto!");
 }
 
   int tamanho = 0;
+  unsigned long time_aquecedores = 0;
 void loop() {
-  loop_aquecedores();
+  if(millis()-time_aquecedores>10){
+    loop_aquecedores();
+    time_aquecedores = millis();
+  }
   boolean pronto=false;
   char* buff= new char[101];
   tamanho=0;
   
   while(tamanho<100){
-    loop_aquecedores();
+    if(millis()-time_aquecedores>10){
+      loop_aquecedores();
+      time_aquecedores = millis();
+    }
     if(Serial.available()){
       byte leitura = Serial.read();
       if(leitura =='^'){
@@ -76,11 +88,15 @@ void loop() {
   pronto=true;
   if(pronto){
     // Read each command pair 
-    char* comando = strtok(buff, " ");
+    char* comando = strtok(buff, " *");
     String retorno = "ok";
     char* parametro;
     while (comando != 0)
     {
+      if(millis()-time_aquecedores>10){
+        loop_aquecedores();
+        time_aquecedores = millis();
+      }
       //Serial.println("@");
       if(comando_g0.equalsIgnoreCase(comando)){
         parametro = strtok(0, " ");//Encontrar o proximo parametro
@@ -151,7 +167,7 @@ void loop() {
       }else{
         retorno = "ok";
       }
-      comando = strtok(0, " ");//Encontrar o proximo parametro
+      comando = strtok(0, " *");//Encontrar o proximo parametro
     }
     Serial.println(retorno);// can be ok, rs or !!.   ok, resend, hardware error
   }else{

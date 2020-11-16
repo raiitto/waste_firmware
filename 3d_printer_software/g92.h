@@ -23,7 +23,7 @@ String g92(char* parametros){
   }
   String retorno = "ok";
   if(Xnnn==nao_iniciado&&Ynnn==nao_iniciado&&Znnn==nao_iniciado&&Ennn==nao_iniciado){
-    g_cordenada_extruder=0;
+    g_cordenada_extruder=0+ao_zerar;
     g_x=0;
     g_y=0;
     g_z=0;
@@ -39,7 +39,7 @@ String g92(char* parametros){
     g_z=Znnn;
   }
   if(Ennn!=nao_iniciado){
-    g_cordenada_extruder=Ennn;
+    g_cordenada_extruder=Ennn+ao_zerar;
   }
   return retorno;
 }
